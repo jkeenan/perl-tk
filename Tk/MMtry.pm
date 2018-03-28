@@ -26,7 +26,9 @@ sub try_compile
  my $stderr_too = $VERBOSE ? '' : $stderr_too;
  my $out   = basename($file,'.c').$Config{'exe_ext'};
  warn "Test Compiling $file\n";
- my $msgs  = `$Config{'cc'} -o $out $Config{'ccflags'} @$inc $file $Config{ldflags} @$lib @$def $stderr_too`;
+ my $cmd   = "$Config{'cc'} -o $out $Config{'ccflags'} @$inc $file $Config{ldflags} @$lib @$def $stderr_too";
+ print STDERR "Command: <$cmd>\n";
+ my $msgs  = `$cmd`;
  my $ok = ($? == 0);
  warn "$msgs\n" if $VERBOSE && $msgs;
  unlink($out) if (-f $out);
@@ -43,6 +45,7 @@ sub try_run
  my $out   = basename($file,'.c').$Config{'exe_ext'};
  warn "Test Compile/Run $file\n";
  my $cmdline = "$Config{'cc'} -o $out $Config{'ccflags'} @$inc $file $Config{ldflags} @$lib @$def";
+ print STDERR "Command: <$cmdline>\n";
  my $msgs  = `$cmdline $stderr_too`;
  my $ok = ($? == 0);
  warn "$cmdline:\n$msgs\n" if $VERBOSE && $msgs;
