@@ -4,6 +4,7 @@ use Tk::MMutil;
 use Tk::Config ();
 use Tk::MMtry;
 use File::Copy;
+$Tk::MMtry::VERBOSE = 1;
 
 my $l = $Config::Config{'lib_ext'};
 my $cc = $Config::Config{'cc'};
